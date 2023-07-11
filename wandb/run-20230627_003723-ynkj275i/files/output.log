@@ -1,0 +1,59 @@
+
+  0%|          | 0/63 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/ran/PycharmProjects/LLaMA-Efficient-Tuning/src/train_sft.py", line 100, in <module>
+    main()
+  File "/home/ran/PycharmProjects/LLaMA-Efficient-Tuning/src/train_sft.py", line 72, in main
+    train_result = trainer.train()
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/trainer.py", line 1531, in train
+    return inner_training_loop(
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/trainer.py", line 1795, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/trainer.py", line 2640, in training_step
+    loss = self.compute_loss(model, inputs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/trainer.py", line 2665, in compute_loss
+    outputs = model(**inputs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/accelerate/utils/operations.py", line 576, in forward
+    return model_forward(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/accelerate/utils/operations.py", line 564, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/amp/autocast_mode.py", line 14, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/peft/peft_model.py", line 827, in forward
+    return self.base_model(
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = old_forward(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 691, in forward
+    outputs = self.model(
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = old_forward(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 571, in forward
+    layer_outputs = torch.utils.checkpoint.checkpoint(
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/utils/checkpoint.py", line 249, in checkpoint
+    return CheckpointFunction.apply(function, preserve, *args)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/autograd/function.py", line 506, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/utils/checkpoint.py", line 107, in forward
+    outputs = run_function(*args)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 567, in custom_forward
+    return module(*inputs, output_attentions, None)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = old_forward(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 293, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = old_forward(*args, **kwargs)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 232, in forward
+    attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+  File "/home/ran/miniconda3/envs/qlora/lib/python3.9/site-packages/torch/nn/functional.py", line 1845, in softmax
+    ret = input.softmax(dim, dtype=dtype)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 698.00 MiB (GPU 0; 23.66 GiB total capacity; 19.73 GiB already allocated; 192.88 MiB free; 21.97 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

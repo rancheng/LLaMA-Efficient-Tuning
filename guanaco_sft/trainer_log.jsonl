@@ -1,0 +1,6 @@
+{"current_steps": 10, "total_steps": 63, "loss": 0.2, "reward": null, "learning_rate": 4.6955539334255716e-05, "epoch": 0.46, "percentage": 15.87, "elapsed_time": "0:05:15", "remaining_time": "0:27:52"}
+{"current_steps": 20, "total_steps": 63, "loss": 0.178, "reward": null, "learning_rate": 3.856365659664399e-05, "epoch": 0.93, "percentage": 31.75, "elapsed_time": "0:10:47", "remaining_time": "0:23:13"}
+{"current_steps": 30, "total_steps": 63, "loss": 0.112, "reward": null, "learning_rate": 2.686825233966061e-05, "epoch": 1.39, "percentage": 47.62, "elapsed_time": "0:16:09", "remaining_time": "0:17:46"}
+{"current_steps": 40, "total_steps": 63, "loss": 0.0462, "reward": null, "learning_rate": 1.4717822421734718e-05, "epoch": 1.86, "percentage": 63.49, "elapsed_time": "0:21:32", "remaining_time": "0:12:23"}
+{"current_steps": 50, "total_steps": 63, "loss": 0.0366, "reward": null, "learning_rate": 5.071687319426946e-06, "epoch": 2.32, "percentage": 79.37, "elapsed_time": "0:26:53", "remaining_time": "0:06:59"}
+{"current_steps": 60, "total_steps": 63, "loss": 0.0581, "reward": null, "learning_rate": 2.7922934437178695e-07, "epoch": 2.78, "percentage": 95.24, "elapsed_time": "0:32:25", "remaining_time": "0:01:37"}

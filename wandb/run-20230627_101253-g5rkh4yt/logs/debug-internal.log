@@ -1,0 +1,152 @@
+2023-06-27 10:12:53,817 INFO    StreamThr :46814 [internal.py:wandb_internal():86] W&B internal server running at pid: 46814, started at: 2023-06-27 10:12:53.816795
+2023-06-27 10:12:53,820 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status
+2023-06-27 10:12:53,823 INFO    WriterThread:46814 [datastore.py:open_for_write():85] open: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/run-g5rkh4yt.wandb
+2023-06-27 10:12:53,823 DEBUG   SenderThread:46814 [sender.py:send():375] send: header
+2023-06-27 10:12:53,862 DEBUG   SenderThread:46814 [sender.py:send():375] send: run
+2023-06-27 10:12:57,913 INFO    SenderThread:46814 [dir_watcher.py:__init__():219] watching files in: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files
+2023-06-27 10:12:57,913 INFO    SenderThread:46814 [sender.py:_start_run_threads():1124] run started: g5rkh4yt with start time 1687831973.817309
+2023-06-27 10:12:57,913 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: summary_record
+2023-06-27 10:12:57,914 INFO    SenderThread:46814 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-06-27 10:12:57,918 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: check_version
+2023-06-27 10:12:57,919 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: check_version
+2023-06-27 10:12:58,919 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_created():278] file/dir created: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/wandb-summary.json
+2023-06-27 10:12:59,540 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:12:59,553 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: run_start
+2023-06-27 10:12:59,558 DEBUG   HandlerThread:46814 [system_info.py:__init__():31] System info init
+2023-06-27 10:12:59,558 DEBUG   HandlerThread:46814 [system_info.py:__init__():46] System info init done
+2023-06-27 10:12:59,558 INFO    HandlerThread:46814 [system_monitor.py:start():181] Starting system monitor
+2023-06-27 10:12:59,558 INFO    SystemMonitor:46814 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-06-27 10:12:59,559 INFO    HandlerThread:46814 [system_monitor.py:probe():201] Collecting system info
+2023-06-27 10:12:59,559 INFO    SystemMonitor:46814 [interfaces.py:start():190] Started cpu monitoring
+2023-06-27 10:12:59,562 INFO    SystemMonitor:46814 [interfaces.py:start():190] Started disk monitoring
+2023-06-27 10:12:59,563 INFO    SystemMonitor:46814 [interfaces.py:start():190] Started gpu monitoring
+2023-06-27 10:12:59,564 INFO    SystemMonitor:46814 [interfaces.py:start():190] Started memory monitoring
+2023-06-27 10:12:59,565 INFO    SystemMonitor:46814 [interfaces.py:start():190] Started network monitoring
+2023-06-27 10:12:59,588 DEBUG   HandlerThread:46814 [system_info.py:probe():195] Probing system
+2023-06-27 10:12:59,593 DEBUG   HandlerThread:46814 [system_info.py:_probe_git():180] Probing git
+2023-06-27 10:12:59,606 DEBUG   HandlerThread:46814 [system_info.py:_probe_git():188] Probing git done
+2023-06-27 10:12:59,606 DEBUG   HandlerThread:46814 [system_info.py:probe():240] Probing system done
+2023-06-27 10:12:59,606 DEBUG   HandlerThread:46814 [system_monitor.py:probe():210] {'os': 'Linux-5.15.0-75-generic-x86_64-with-glibc2.31', 'python': '3.9.16', 'heartbeatAt': '2023-06-27T02:12:59.588443', 'startedAt': '2023-06-27T02:12:53.791483', 'docker': None, 'cuda': None, 'args': ('--model_name_or_path', 'timdettmers/guanaco-33b-merged', '--do_train', '--dataset', 'guanaco_home_assitant', '--finetuning_type', 'lora', '--output_dir', 'guanaco_sft', '--overwrite_cache', '--per_device_train_batch_size', '4', '--gradient_accumulation_steps', '4', '--lr_scheduler_type', 'cosine', '--logging_steps', '10', '--save_steps', '1000', '--quantization_bit', '4', '--quantization_type', 'nf4', '--optim', 'paged_adamw_8bit', '--lora_target', 'q_proj,k_proj,v_proj,o_proj', '--learning_rate', '5e-5', '--num_train_epochs', '3.0', '--plot_loss', '--fp16'), 'state': 'running', 'program': '/home/ran/PycharmProjects/LLaMA-Efficient-Tuning/src/train_sft.py', 'codePath': 'src/train_sft.py', 'git': {'remote': 'https://github.com/hiyouga/LLaMA-Efficient-Tuning.git', 'commit': '993cabdd4c9c47549651bffd620675172fb347b6'}, 'email': None, 'root': '/home/ran/PycharmProjects/LLaMA-Efficient-Tuning', 'host': 'z490x', 'username': 'ran', 'executable': '/home/ran/miniconda3/envs/qlora/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 3780.3136875, 'min': 800.0, 'max': 5100.0}, 'cpu_freq_per_core': [{'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3485.019, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}, {'current': 3800.0, 'min': 800.0, 'max': 5100.0}], 'disk': {'total': 1876.218734741211, 'used': 529.6692314147949}, 'gpu': 'NVIDIA GeForce RTX 3090', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3090', 'memory_total': 25769803776}], 'memory': {'total': 125.68698501586914}}
+2023-06-27 10:12:59,606 INFO    HandlerThread:46814 [system_monitor.py:probe():211] Finished collecting system info
+2023-06-27 10:12:59,606 INFO    HandlerThread:46814 [system_monitor.py:probe():214] Publishing system info
+2023-06-27 10:12:59,607 DEBUG   HandlerThread:46814 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-06-27 10:12:59,608 DEBUG   HandlerThread:46814 [system_info.py:_save_pip():67] Saving pip packages done
+2023-06-27 10:12:59,608 DEBUG   HandlerThread:46814 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-06-27 10:12:59,920 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_created():278] file/dir created: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/conda-environment.yaml
+2023-06-27 10:12:59,920 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_created():278] file/dir created: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/requirements.txt
+2023-06-27 10:13:01,737 DEBUG   HandlerThread:46814 [system_info.py:_save_conda():86] Saving conda packages done
+2023-06-27 10:13:01,745 INFO    HandlerThread:46814 [system_monitor.py:probe():216] Finished publishing system info
+2023-06-27 10:13:01,749 DEBUG   SenderThread:46814 [sender.py:send():375] send: files
+2023-06-27 10:13:01,749 INFO    SenderThread:46814 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-06-27 10:13:01,760 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:13:01,761 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:13:01,915 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/conda-environment.yaml
+2023-06-27 10:13:01,916 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_created():278] file/dir created: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/wandb-metadata.json
+2023-06-27 10:13:03,386 DEBUG   SenderThread:46814 [sender.py:send():375] send: telemetry
+2023-06-27 10:13:03,387 DEBUG   SenderThread:46814 [sender.py:send():375] send: config
+2023-06-27 10:13:03,388 DEBUG   SenderThread:46814 [sender.py:send():375] send: metric
+2023-06-27 10:13:03,388 DEBUG   SenderThread:46814 [sender.py:send():375] send: telemetry
+2023-06-27 10:13:03,389 DEBUG   SenderThread:46814 [sender.py:send():375] send: metric
+2023-06-27 10:13:03,389 WARNING SenderThread:46814 [sender.py:send_metric():1329] Seen metric with glob (shouldn't happen)
+2023-06-27 10:13:03,916 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_created():278] file/dir created: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/output.log
+2023-06-27 10:13:05,246 INFO    wandb-upload_0:46814 [upload_job.py:push():137] Uploaded file /tmp/tmpmvoff3ecwandb/6874wgxz-wandb-metadata.json
+2023-06-27 10:13:05,390 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:05,917 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/output.log
+2023-06-27 10:13:10,391 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:15,391 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:16,758 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:13:16,759 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:13:21,053 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:21,924 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/output.log
+2023-06-27 10:13:26,059 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:26,926 INFO    Thread-16 :46814 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/ran/PycharmProjects/LLaMA-Efficient-Tuning/wandb/run-20230627_101253-g5rkh4yt/files/config.yaml
+2023-06-27 10:13:31,759 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:13:31,759 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:13:33,046 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:38,047 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:43,049 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:46,758 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:13:46,759 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:13:48,137 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:53,139 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:58,141 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:13:59,565 DEBUG   SystemMonitor:46814 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-06-27 10:13:59,567 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:14:01,758 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:14:01,759 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:14:04,009 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:09,010 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:14,011 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:16,759 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:14:16,759 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:14:19,616 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:24,617 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:29,570 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:14:30,572 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:31,761 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:14:31,764 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:14:36,166 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:41,167 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:46,168 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:46,761 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:14:46,765 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:14:52,072 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:57,074 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:14:59,572 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:15:01,759 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:15:01,760 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:15:03,009 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:08,010 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:13,010 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:16,764 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:15:16,767 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:15:18,169 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:23,171 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:28,171 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:29,573 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:15:31,759 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:15:31,760 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:15:33,533 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:38,534 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:43,536 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:46,760 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:15:46,760 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:15:48,989 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:53,991 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:58,991 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:15:59,574 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:16:01,760 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:16:01,761 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:16:04,011 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:09,012 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:14,014 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:16,763 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:16:16,763 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:16:19,078 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:24,079 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:29,081 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:29,576 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:16:31,766 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:16:31,768 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:16:34,148 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:39,150 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:44,150 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:46,764 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:16:46,767 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:16:49,617 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:54,619 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:16:59,583 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:17:00,586 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:17:01,761 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:17:01,762 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:17:06,499 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:17:11,499 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:17:16,502 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:17:16,761 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:17:16,761 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:17:22,230 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:17:27,231 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report
+2023-06-27 10:17:29,583 DEBUG   SenderThread:46814 [sender.py:send():375] send: stats
+2023-06-27 10:17:31,761 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-27 10:17:31,761 DEBUG   SenderThread:46814 [sender.py:send_request():402] send_request: stop_status
+2023-06-27 10:17:34,147 DEBUG   HandlerThread:46814 [handler.py:handle_request():144] handle_request: status_report

@@ -1,0 +1,82 @@
+
+
+
+
+
+
+
+
+
+
+
+ 16%|█▌        | 10/63 [00:55<04:42,  5.33s/it]
+
+
+
+
+
+
+
+
+
+
+ 32%|███▏      | 20/63 [01:55<04:15,  5.95s/it]
+
+
+
+
+
+
+
+
+
+
+ 48%|████▊     | 30/63 [02:51<03:00,  5.47s/it]
+
+
+
+
+
+
+
+
+
+ 62%|██████▏   | 39/63 [03:45<02:23,  5.99s/it]
+
+
+
+
+
+
+
+
+
+
+
+ 79%|███████▉  | 50/63 [04:45<01:08,  5.24s/it]
+
+
+
+
+
+
+
+
+
+
+ 95%|█████████▌| 60/63 [05:44<00:17,  5.80s/it]
+
+
+ 98%|█████████▊| 62/63 [05:57<00:06,  6.24s/it]
+{'train_runtime': 368.2991, 'train_samples_per_second': 2.81, 'train_steps_per_second': 0.171, 'train_loss': 0.1447757463606577, 'epoch': 2.9}
+***** train metrics *****
+  epoch                    =        2.9
+  train_loss               =     0.1448
+  train_runtime            = 0:06:08.29
+  train_samples_per_second =       2.81
+  train_steps_per_second   =      0.171
+100%|██████████| 63/63 [06:02<00:00,  5.83s/it][INFO|trainer.py:1920] 2023-06-26 20:12:40,835 >>
+Training completed. Do not forget to share your model on huggingface.co/models =)
+100%|██████████| 63/63 [06:02<00:00,  5.76s/it]
+Figure saved: path_to_sft_checkpoint/training_loss.png
+06/26/2023 20:12:41 - WARNING - utils.other - No metric eval_loss to plot.
