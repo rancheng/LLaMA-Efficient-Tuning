@@ -134,7 +134,7 @@ class DataTrainingArguments:
     )
     source_prefix: Optional[str] = field(
         default=None,
-        metadata={"help": "A prefix to add before every source text. Use `|` to separate multiple prefixes."}
+        metadata={"help": "A prefix to add before every source text. Use `|` to separate multiple prefixes in training."}
     )
     dev_ratio: Optional[float] = field(
         default=0,
@@ -145,7 +145,7 @@ class DataTrainingArguments:
         metadata={"help": "Which template to use for constructing prompts in training and inference."}
     )
 
-    def __post_init__(self): # support mixing multiple datasets
+    def init_for_training(self): # support mixing multiple datasets
         dataset_names = [ds.strip() for ds in self.dataset.split(",")]
         with open(os.path.join(self.dataset_dir, "dataset_info.json"), "r") as f:
             dataset_info = json.load(f)
@@ -198,6 +198,7 @@ class FinetuningArguments:
         metadata={"help": "Number of decoder blocks in the model. \
                   LLaMA choices: [\"32\", \"40\", \"60\", \"80\"], \
                   BLOOM choices: [\"24\", \"30\", \"70\"], \
+                  Falcon choices: [\"32\", \"60\"], \
                   Baichuan choices: [\"32\"]"}
     )
     num_layer_trainable: Optional[int] = field(
@@ -208,7 +209,7 @@ class FinetuningArguments:
         default="mlp",
         metadata={"help": "Name of trainable modules for Freeze fine-tuning. \
                   LLaMA choices: [\"mlp\", \"self_attn\"], \
-                  BLOOM choices: [\"mlp\", \"self_attention\"], \
+                  BLOOM & Falcon choices: [\"mlp\", \"self_attention\"], \
                   Baichuan choices: [\"mlp\", \"self_attn\"]"}
     )
     lora_rank: Optional[int] = field(
@@ -227,7 +228,7 @@ class FinetuningArguments:
         default="q_proj,v_proj",
         metadata={"help": "Name(s) of target modules to apply LoRA. Use comma to separate multiple modules. \
                   LLaMA choices: [\"q_proj\", \"k_proj\", \"v_proj\", \"o_proj\", \"gate_proj\", \"up_proj\", \"down_proj\"], \
-                  BLOOM choices: [\"query_key_value\", \"self_attention.dense\", \"mlp.dense\"], \
+                  BLOOM & Falcon choices: [\"query_key_value\", \"self_attention.dense\", \"mlp.dense\"], \
                   Baichuan choices: [\"W_pack\", \"o_proj\", \"gate_proj\", \"up_proj\", \"down_proj\"]"}
     )
 
@@ -236,7 +237,7 @@ class FinetuningArguments:
             self.lora_target = [target.strip() for target in self.lora_target.split(",")]
 
         if self.num_layer_trainable > 0: # fine-tuning the last n layers if num_layer_trainable > 0
-            trainable_layer_ids = [self.num_hidden_layers - k for k in range(self.num_layer_trainable)]
+            trainable_layer_ids = [self.num_hidden_layers - k - 1 for k in range(self.num_layer_trainable)]
         else: # fine-tuning the first n layers if num_layer_trainable < 0
             trainable_layer_ids = [k for k in range(-self.num_layer_trainable)]
 

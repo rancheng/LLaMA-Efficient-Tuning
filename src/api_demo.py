@@ -10,10 +10,11 @@ import uvicorn
 from threading import Thread
 from pydantic import BaseModel, Field
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from transformers import TextIteratorStreamer
-from starlette.responses import StreamingResponse
-from typing import Any, Dict, List, Literal, Optional, Union
+from sse_starlette import EventSourceResponse
+from typing import Any, Dict, List, Literal, Optional
 
 from utils import (
     Template,
@@ -34,19 +35,28 @@ async def lifespan(app: FastAPI): # collects GPU memory
 app = FastAPI(lifespan=lifespan)
 
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 class ModelCard(BaseModel):
     id: str
-    object: str = "model"
-    created: int = Field(default_factory=lambda: int(time.time()))
-    owned_by: str = "owner"
+    object: Optional[str] = "model"
+    created: Optional[int] = Field(default_factory=lambda: int(time.time()))
+    owned_by: Optional[str] = "owner"
     root: Optional[str] = None
     parent: Optional[str] = None
-    permission: Optional[list] = None
+    permission: Optional[list] = []
 
 
 class ModelList(BaseModel):
-    object: str = "list"
-    data: List[ModelCard] = []
+    object: Optional[str] = "list"
+    data: Optional[List[ModelCard]] = []
 
 
 class ChatMessage(BaseModel):
@@ -64,8 +74,8 @@ class ChatCompletionRequest(BaseModel):
     messages: List[ChatMessage]
     temperature: Optional[float] = None
     top_p: Optional[float] = None
-    max_length: Optional[int] = None
-    max_new_tokens: Optional[int] = None
+    n: Optional[int] = 1
+    max_tokens: Optional[int] = None
     stream: Optional[bool] = False
 
 
@@ -78,14 +88,30 @@ class ChatCompletionResponseChoice(BaseModel):
 class ChatCompletionResponseStreamChoice(BaseModel):
     index: int
     delta: DeltaMessage
-    finish_reason: Optional[Literal["stop", "length"]]
+    finish_reason: Optional[Literal["stop", "length"]] = None
+
+
+class ChatCompletionResponseUsage(BaseModel):
+    prompt_tokens: int
+    completion_tokens: int
+    total_tokens: int
 
 
 class ChatCompletionResponse(BaseModel):
-    model: str
-    object: Literal["chat.completion", "chat.completion.chunk"]
-    choices: List[Union[ChatCompletionResponseChoice, ChatCompletionResponseStreamChoice]]
+    id: Optional[str] = "chatcmpl-default"
+    object: Literal["chat.completion"]
     created: Optional[int] = Field(default_factory=lambda: int(time.time()))
+    model: str
+    choices: List[ChatCompletionResponseChoice]
+    usage: ChatCompletionResponseUsage
+
+
+class ChatCompletionStreamResponse(BaseModel):
+    id: Optional[str] = "chatcmpl-default"
+    object: Literal["chat.completion.chunk"]
+    created: Optional[int] = Field(default_factory=lambda: int(time.time()))
+    model: str
+    choices: List[ChatCompletionResponseStreamChoice]
 
 
 @app.get("/v1/models", response_model=ModelList)
@@ -125,20 +151,24 @@ async def create_chat_completion(request: ChatCompletionRequest):
         "top_p": request.top_p if request.top_p else gen_kwargs["top_p"],
         "logits_processor": get_logits_processor()
     })
-    if request.max_length:
-        gen_kwargs.pop("max_new_tokens", None)
-        gen_kwargs["max_length"] = request.max_length
-    if request.max_new_tokens:
+
+    if request.max_tokens:
         gen_kwargs.pop("max_length", None)
-        gen_kwargs["max_new_tokens"] = request.max_new_tokens
+        gen_kwargs["max_new_tokens"] = request.max_tokens
 
     if request.stream:
         generate = predict(gen_kwargs, request.model)
-        return StreamingResponse(generate, media_type="text/event-stream")
+        return EventSourceResponse(generate, media_type="text/event-stream")
 
     generation_output = model.generate(**gen_kwargs)
     outputs = generation_output.tolist()[0][len(inputs["input_ids"][0]):]
     response = tokenizer.decode(outputs, skip_special_tokens=True)
+
+    usage = ChatCompletionResponseUsage(
+        prompt_tokens=len(inputs["input_ids"][0]),
+        completion_tokens=len(outputs),
+        total_tokens=len(inputs["input_ids"][0]) + len(outputs)
+    )
 
     choice_data = ChatCompletionResponseChoice(
         index=0,
@@ -146,7 +176,7 @@ async def create_chat_completion(request: ChatCompletionRequest):
         finish_reason="stop"
     )
 
-    return ChatCompletionResponse(model=request.model, choices=[choice_data], object="chat.completion")
+    return ChatCompletionResponse(model=request.model, choices=[choice_data], usage=usage, object="chat.completion")
 
 
 async def predict(gen_kwargs: Dict[str, Any], model_id: str):
@@ -163,8 +193,8 @@ async def predict(gen_kwargs: Dict[str, Any], model_id: str):
         delta=DeltaMessage(role="assistant"),
         finish_reason=None
     )
-    chunk = ChatCompletionResponse(model=model_id, choices=[choice_data], object="chat.completion.chunk")
-    yield "data: {}\n\n".format(chunk.json(exclude_unset=True, ensure_ascii=False))
+    chunk = ChatCompletionStreamResponse(model=model_id, choices=[choice_data], object="chat.completion.chunk")
+    yield chunk.json(exclude_unset=True, ensure_ascii=False)
 
     for new_text in streamer:
         if len(new_text) == 0:
@@ -175,16 +205,17 @@ async def predict(gen_kwargs: Dict[str, Any], model_id: str):
             delta=DeltaMessage(content=new_text),
             finish_reason=None
         )
-        chunk = ChatCompletionResponse(model=model_id, choices=[choice_data], object="chat.completion.chunk")
-        yield "data: {}\n\n".format(chunk.json(exclude_unset=True, ensure_ascii=False))
+        chunk = ChatCompletionStreamResponse(model=model_id, choices=[choice_data], object="chat.completion.chunk")
+        yield chunk.json(exclude_unset=True, ensure_ascii=False)
 
     choice_data = ChatCompletionResponseStreamChoice(
         index=0,
         delta=DeltaMessage(),
         finish_reason="stop"
     )
-    chunk = ChatCompletionResponse(model=model_id, choices=[choice_data], object="chat.completion.chunk")
-    yield "data: {}\n\n".format(chunk.json(exclude_unset=True, ensure_ascii=False))
+    chunk = ChatCompletionStreamResponse(model=model_id, choices=[choice_data], object="chat.completion.chunk")
+    yield chunk.json(exclude_unset=True, ensure_ascii=False)
+    yield "[DONE]"
 
 
 if __name__ == "__main__":
@@ -194,4 +225,4 @@ if __name__ == "__main__":
     prompt_template = Template(data_args.prompt_template)
     source_prefix = data_args.source_prefix if data_args.source_prefix else ""
 
-    uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)
+    uvicorn.run(app, host="0.0.0.0", port=8000, workers=1)
