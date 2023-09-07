@@ -14,10 +14,6 @@
     "file_name": "alpaca_gpt4_data_zh.json",
     "file_sha1": "3eaa3bda364ccdd59925d7448a698256c31ef845"
   },
-  "guanaco_home_assitant": {
-    "file_name": "home_assistant_data_chn.json",
-    "file_sha1": "71f5564b3d1fa52ca31a2ce40d07545a7717a81a"
-  },
   "belle_0.5m": {
     "hf_hub_url": "BelleGroup/train_0.5M_CN"
   },
